@@ -58,11 +58,11 @@
   background: #000;
 }
 .row.civil-row{
-  height:80rpx;
+  height:100rpx;
 }
 .row.civil-row .civil-icon{
-  height: 80rpx;
-  width:80rpx;
+  height: 70rpx;
+  width:70rpx;
   display: block;
   margin: 0 auto;
   background-size:auto 100%;
@@ -240,10 +240,10 @@
 .astro-weather.snow{
   background-position: 100% 0;
 }
-.civil-icon.civil-day{
+.civil-icon.civil-time-day{
   background-position: 0 0;
 }
-.civil-icon.civil-night{
+.civil-icon.civil-time-night{
   background-position: 100% 0;
 }
 
@@ -253,7 +253,7 @@
 .civil-icon.civil-cloudy{
   background-image:url(/images/about_civil_cloudy.png)
 }
-.civil-icon.civil-fog{
+.civil-icon.civil-humid{
   background-image:url(/images/about_civil_fog.png)
 }
 .civil-icon.civil-ishower{
