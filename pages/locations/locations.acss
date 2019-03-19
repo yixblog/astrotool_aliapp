@@ -1,0 +1,35 @@
+.add_btn{
+  margin-top: 15rpx;
+  display: block;
+}
+
+.location-list{
+  display: block;
+}
+
+.am-list-content .point{
+  color:#777;
+  float: right;
+  font-size: 0.9em;
+}
+
+.map{
+  width: 420rpx!important;
+  height: 300rpx!important;
+  margin-bottom: 15px;
+}
+
+.popup-container{
+  background: #000;
+  height:100%;
+  width: 420rpx;
+}
+
+.popup-container .popup-title{
+  color: #aaa;
+  font-weight: bold;
+  text-align: center;
+  padding:10px 0;
+  width:100%;
+  background: #500;
+}

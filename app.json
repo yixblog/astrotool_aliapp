@@ -1,0 +1,10 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/locations/locations",
+    "pages/seventimer/seventimer"
+  ],
+  "window": {
+    "defaultTitle": "佚仙天文"
+  }
+}

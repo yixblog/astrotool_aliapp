@@ -1,0 +1,11 @@
+page {
+  flex: 1;
+  display: flex;
+  background: #303030;
+  color: #fff;
+}
+
+.page{
+  width:100%;
+  padding: 15rpx;
+}

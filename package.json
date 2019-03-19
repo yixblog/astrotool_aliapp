@@ -1,0 +1,9 @@
+{
+  "name": "astro-tool",
+  "version": "0.0.1",
+  "licence": "MIT",
+  "denpendencies": {},
+  "dependencies": {
+    "mini-antui": "^0.4.19"
+  }
+}

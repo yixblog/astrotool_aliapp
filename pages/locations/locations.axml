@@ -1,0 +1,23 @@
+<view class="page">
+  
+  <list class="location-list">
+    <block class="location" a:for="{{locations}}">
+      <list-item align="middle" onClick="displayNavOperations" index={{index}} 
+        data-locationid={{item.location_id}} arrow={{item.arrow}}>
+        {{item.name}}
+        <text class="point">{{item.position}}</text>
+      </list-item>
+    </block>
+  </list>
+  <button type="primary" class="add_btn" onTap="addLocation">添加地理位置</button>
+  <popup show={{showLocationMenu}} position="right" onClose="closeLocationMenu">
+    <view class="popup-container">
+      <view class="popup-title">{{activeLocation.name}}</view>
+      <map id="map" class="map" longitude={{map.longitude}} latitude={{map.latitude}}
+          setting={{map.setting}} markers={{map.markers}}></map>
+      <button type="primary" plain a:for={{activeLocation.links}} data-rel="{{item.rel}}" data-link="{{item.href}}"
+          onTap="handleLocationAction">{{item.title}}</button>
+    </view>
+    
+  </popup>
+</view>
