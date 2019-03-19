@@ -75,5 +75,13 @@ Page({
   },
   handleLocationAction(evt){
     console.log("location action fired:",evt);
+    let dataSet = evt.target.dataset;
+    let thisPage = this;
+    my.navigateTo({
+      url:'/pages/seventimer/seventimer?lnk='+encodeURIComponent(dataSet.link)+'&name='+this.data.activeLocation.name,
+      complete:()=>{
+        thisPage.closeLocationMenu();
+      }
+    })
   }
 });

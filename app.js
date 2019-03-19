@@ -43,10 +43,15 @@ App({
           thisApp.requestWithAuth(requestObj);
         })
       }else{
-        my.alert({
-          title:res.data.error_code,
-          content:res.data.message
-        })
+        if(res.data){
+           my.alert({
+            title:res.data.error_code,
+            content:res.data.message
+          });
+        }else{
+          my.alert({title:'HTTP ERROR',content:'网络错误:'+res.status})
+        }
+       
       }
     };
     my.request(requestObj);
