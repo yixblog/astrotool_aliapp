@@ -98,7 +98,7 @@ Page({
           let info = {init_time:initTime.toLocaleString(),dates:[],hourColumns:hours};
           for(let datestr of dates){
             let dt = new Date(datestr);
-            let dateStringShort = addZero(serieDate.getMonth()+1)+'-'+addZero(serieDate.getDate());
+            let dateStringShort = addZero(dt.getMonth()+1)+'-'+addZero(dt.getDate());
             let dateRow = {series:[],date:datestr,shortdate:dateStringShort};
             for(let hour of hours){
               let result = data.dataseries.filter(serie=>serie.dailyHour===hour && serie.dateString===datestr);
