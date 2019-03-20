@@ -14,15 +14,15 @@
 }
 
 .map{
-  width: 420rpx!important;
-  height: 300rpx!important;
+  width: 500rpx!important;
+  height: 400rpx!important;
   margin-bottom: 15px;
 }
 
 .popup-container{
   background: #000;
   height:100%;
-  width: 420rpx;
+  width: 500rpx;
 }
 
 .popup-container .popup-title{
@@ -32,4 +32,13 @@
   padding:10px 0;
   width:100%;
   background: #500;
+}
+.popup-container .popup-title title{
+  max-width: 340rpx;
+}
+.popup-container .popup-title image{
+  height: 24rpx;
+  width:24rpx;
+  margin-left: 5rpx;
+  display: inline-block
 }

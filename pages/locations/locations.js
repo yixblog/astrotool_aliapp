@@ -47,12 +47,23 @@ Page({
         showMapText:1
       }
     }
+    clickedLocation.editname=false;
     this.setData({
       map: map,
       showLocationMenu: true,
       activeLocation: clickedLocation
     });
     
+  },
+  editNameClick(){
+    this.setData({
+      'activeLocation.editname':true
+    })
+  },
+  quitEditName(){
+    this.setData({
+      'activeLocation.editname':false
+    })
   },
   addLocation(){
     let thisPage = this;
@@ -73,15 +84,67 @@ Page({
       showLocationMenu: false
     });
   },
-  handleLocationAction(evt){
-    console.log("location action fired:",evt);
-    let dataSet = evt.target.dataset;
+  openSevenTimer(){
+    let lnks = this.data.activeLocation.links.filter(lnkItem=>lnkItem.rel==='7timer');
+    if(!lnks.length){
+      return;
+    }
     let thisPage = this;
+    let lnk = lnks[0];
     my.navigateTo({
-      url:'/pages/seventimer/seventimer?lnk='+encodeURIComponent(dataSet.link)+'&name='+this.data.activeLocation.name,
+      url:'/pages/seventimer/seventimer?lnk='+encodeURIComponent(lnk.href)+'&name='+this.data.activeLocation.name,
       complete:()=>{
         thisPage.closeLocationMenu();
       }
     })
+  },
+  deleteLocation(){
+    let lnks = this.data.activeLocation.links.filter(lnkItem=>lnkItem.rel==='del');
+    if(!lnks.length){
+      return;
+    }
+    let lnk = lnks[0];
+    let pageThis = this;
+    my.confirm({
+      title:'警告',
+      content:'删除地点后无法找回，只能重新添加，确认继续？',
+      success:res=>{
+        if(res.confirm){
+          app.requestWithAuth({
+            url:lnk.href,
+            method:'POST',
+            success:res=>pageThis.onLoad()
+          })
+        }
+      }
+    })
+   
+  },
+  submitNewName(evt){
+    let lnks = this.data.activeLocation.links.filter(lnkItem=>lnkItem.rel==='editname');
+    if(!lnks.length){
+      return;
+    }
+    let newName = evt.detail.value;
+    if(!newName.length){
+      my.alert({content:'新名称不能为空'});
+      return;
+    }
+    let lnk = lnks[0];
+    let pageThis = this;
+    app.requestWithAuth({
+      url:lnk.href,
+      method:'POST',
+      contentType:'application/json',
+      data:{name:newName},
+      success:(res)=>{
+        pageThis.setData({
+          'activeLocation.name':newName
+        })
+      }
+    })
+  },
+  onPullDownRefresh(){
+    this.onLoad()
   }
 });

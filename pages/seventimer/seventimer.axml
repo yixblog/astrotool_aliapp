@@ -6,7 +6,7 @@
     <view class="tabs-bar">
       <view a:for={{tabs}} class="tab-item {{activeTab===index?'active':''}}" onTap="switchTab" data-index={{index}}>{{item.title}}</view>
     </view>
-    <swiper duration="{{300}}" current={{activeTab}}>
+    <swiper duration="{{300}}" current={{activeTab}} onChange=swiperChanged>
       <swiper-item>
         <view>
         <view class="gen-time">生成时间：{{astro.init_time}}</view>
@@ -83,20 +83,43 @@
           <view class="column" a:for={{civil.hourColumns}}>{{item}}</view>
         </view>
         <view class="row civil-row" a:for={{civil.dates}} a:for-item="dateitem">
-          <view class="column">{{dateitem.shortdate}}</view>
+          <view class="column">
+              <view class="line">{{dateitem.shortdate}}</view>
+              <view class="line">{{dateitem.weekday}}</view>
+            </view>
           <view class="column" a:for={{dateitem.series}}>
             <view a:if={{item.nodata}}></view>
             <view a:else>
               <view class="civil-icon civil-{{item.weatherType}} civil-time-{{item.weatherTime}}"></view>
-              <view class="civil-info">
-                <text class="color:{{item.tempColor}}">{{item.temp2m}}℃</text>/<text>{{item.rh2m}}</text>
-              </view>
+              <view class="civil-info" style="color:{{item.tempColor}}">{{item.temp2m}}</view>
+              <view class="civil-info">{{item.rh2m}}</view>
             </view>
           </view>
         </view>
         </view>
       </swiper-item>
-      <swiper-item><view class="gen-time">生成时间：{{two.init_time}}</view></swiper-item>
+      <swiper-item>
+        <view>
+          <view class="gen-time">生成时间：{{two.init_time}}</view>
+          <view class="row civil-row" a:for={{two.dates}} a:for-item="dateitem">
+            <view class="column">
+              <view class="line">{{dateitem.shortdate}}</view>
+              <view class="line">{{dateitem.weekday}}</view>
+            </view>
+            <view class="column" a:for={{dateitem.series}}>
+              <view a:if={{item.nodata}}></view>
+              <view a:else>
+                <view class="civil-icon civil-{{item.weatherType}}"></view>
+              </view>
+            </view>
+            <view class="column">
+              <view class="line">{{dateitem.temp2m.min||''}}℃-{{dateitem.temp2m.max||''}}℃</view>
+              <view class="line">{{dateitem.rhContent}}</view>
+            </view>
+
+          </view>
+        </view>
+      </swiper-item>
     </swiper>
   </view>
   

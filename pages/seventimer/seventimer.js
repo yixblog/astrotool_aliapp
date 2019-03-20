@@ -22,6 +22,7 @@ const rhInfo = {
   '15':{content:'95%-99%',level:3},
   '16':{content:'100%',level:3}
 };
+const weeks = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
 Page({
   data: {
     tabs:[
@@ -42,13 +43,30 @@ Page({
       method:'GET',
       success:(res)=>{
         console.log('received response',res);
+        let twoData = this.timepointSplit(res.data.two);
+        twoData.dates.forEach(dateitem=>{
+          dateitem.temp2m = {
+            min:dateitem.series.filter(serie=>!serie.nodata).map(serie=>serie.rh2m.min).reduce((a,b)=>Math.min(a,b)),
+            max:dateitem.series.filter(serie=>!serie.nodata).map(serie=>serie.rh2m.max).reduce((a,b)=>Math.max(a,b))
+          };
+          let rhContents = dateitem.series.map(serie=>serie.rhContent).filter(ctx=>ctx!=null);
+          if(rhContents.length==1){
+            dateitem.rhContent = rhContents[0];
+          }else{
+            let flatMap = (a,mapFun)=>[].concat(...a.map(mapFun));
+            let rhValues = flatMap(rhContents,t=>t.split('-')).map(rh=>parseInt(rh.replace('%','')));
+            let minRh = rhValues.reduce((a,b)=>Math.min(a,b));
+            let maxRh = rhValues.reduce((a,b)=>Math.max(a,b));
+            dateitem.rhContent = minRh+'%-'+maxRh+'%'
+          }
+        })
         this.setData({
           astro:this.timepointSplit(res.data.astro),
           civil:this.timepointSplit(res.data.civil),
-          two:this.timepointSplit(res.data.two),
+          two:twoData,
           loading: false
         });
-
+        console.log('page data',this.data);
       }
     })
   },
@@ -99,7 +117,7 @@ Page({
           for(let datestr of dates){
             let dt = new Date(datestr);
             let dateStringShort = addZero(dt.getMonth()+1)+'-'+addZero(dt.getDate());
-            let dateRow = {series:[],date:datestr,shortdate:dateStringShort};
+            let dateRow = {series:[],date:datestr,shortdate:dateStringShort,weekday:weeks[dt.getDay()]};
             for(let hour of hours){
               let result = data.dataseries.filter(serie=>serie.dailyHour===hour && serie.dateString===datestr);
               if(result.length){
@@ -128,11 +146,15 @@ Page({
       let green = 255-red;
       return 'rgb('+red+','+green+',0)';
     }else if(temp>=bluepoint && temp<greenpoint){
-      let green = Math.floor(255*(temp-bluepoint)/15);
-      let blue = 255-green;
-      return 'rgb(0,'+green+','+blue+')';
+      let blue = 255-Math.floor(255*(temp-bluepoint)/15);
+      return 'rgb(0,255,'+blue+')';
     }else{
-      return '#00f';
+      return '#0ff';
     }
-  }
+  },
+  swiperChanged(evt){
+    this.setData({
+      activeTab:evt.detail.current
+    })
+  },
 });

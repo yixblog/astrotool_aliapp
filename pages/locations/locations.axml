@@ -12,11 +12,18 @@
   <button type="primary" class="add_btn" onTap="addLocation">添加地理位置</button>
   <popup show={{showLocationMenu}} position="right" onClose="closeLocationMenu">
     <view class="popup-container">
-      <view class="popup-title">{{activeLocation.name}}</view>
+      <view class="popup-title" a:if={{activeLocation.editname}}>
+        <input type="text" placeholder="输入新名称" value="{{activeLocation.name}}" confirm-type="send" 
+          onConfirm="submitNewName" onBlur="quitEditName"/>
+      </view>
+      <view class="popup-title" a:else onTap="editNameClick">
+        <text>{{activeLocation.name}}</text>
+        <image src="/images/edit.svg" mode="aspectFit" />
+      </view>
       <map id="map" class="map" longitude={{map.longitude}} latitude={{map.latitude}}
           setting={{map.setting}} markers={{map.markers}}></map>
-      <button type="primary" plain a:for={{activeLocation.links}} data-rel="{{item.rel}}" data-link="{{item.href}}"
-          onTap="handleLocationAction">{{item.title}}</button>
+      <button type="primary" plain onTap="openSevenTimer">晴天钟</button>
+      <button type="warn" plain onTap="deleteLocation">删除</button>
     </view>
     
   </popup>
