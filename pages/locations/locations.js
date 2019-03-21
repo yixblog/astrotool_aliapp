@@ -18,7 +18,7 @@ Page({
           location.position = location.longitude.toFixed(4)+longitudeSymbol+','+location.latitude.toFixed(4)+latitudeSymbol;
           location.arrow=true;
         }
-        pageThis.setData({locations:locations});
+        pageThis.setData({locations:locations,showLocationMenu:false});
         for(let link of res.data.links){
           pageThis.links[link.rel]=link;
         }

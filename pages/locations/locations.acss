@@ -42,3 +42,6 @@
   margin-left: 5rpx;
   display: inline-block
 }
+.popup-container button{
+  margin-bottom: 15rpx;
+}
