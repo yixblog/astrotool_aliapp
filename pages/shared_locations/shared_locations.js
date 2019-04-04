@@ -65,7 +65,7 @@ Page({
       success: res => {
         my.alert({
           title: '添加成功',
-          content: '添加共享地理位置成功'
+          content: '添加共享地理位置成功，返回后请点击刷新加载'
         });
         my.navigateBack({
 
