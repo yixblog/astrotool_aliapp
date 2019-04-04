@@ -2,7 +2,7 @@
   <list class="location-list" a:if="{{shared_locations && shared_locations.length}}">
     <block class="location" a:for="{{shared_locations}}">
       <list-item align="middle" onClick="displayNavOperations" index={{index}} data-locationid={{item.locationId}}>         {{item.name}}                                        
-        <text class="point">{{(item.distance/1000).toLocaleString()}}km                                
+        <text class="point">{{(item.distance/1000).toFixed(3)}}km                                
         </text>
       </list-item>
     </block>
