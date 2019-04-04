@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/locations/locations",
-    "pages/seventimer/seventimer"
+    "pages/seventimer/seventimer",
+    "pages/shared_locations/shared_locations"
   ],
   "window": {
     "defaultTitle": "佚仙天文"

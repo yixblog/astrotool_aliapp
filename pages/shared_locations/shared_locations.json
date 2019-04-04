@@ -1,0 +1,8 @@
+{
+  "defaultTitle": "从共享地理位置加载",
+  "usingComponents": {
+    "list": "mini-antui/es/list/index",
+    "list-item": "mini-antui/es/list/list-item/index",
+    "popup": "mini-antui/es/popup/index"
+  }
+}
